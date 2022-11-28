@@ -30,10 +30,10 @@
                     <div class="hero-body">
                         <div class="container">
                             <h1 class="title">
-                                Salom, Foydalanuvchi.
+                                Salom, {{ user.first_name }}
                             </h1>
                             <h2 class="subtitle">
-                                I hope you are having a great day!
+                                Daraxtlarni saqlab qoling
                             </h2>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="tile is-ancestor has-text-centered">
                         <div class="tile is-parent">
                             <article class="tile is-child box">
-                                <p class="title">439k</p>
+                                <p class="title">{{ userTrees.length }}</p>
                                 <p class="subtitle">Daraxtlar</p>
                             </article>
                         </div>
@@ -80,17 +80,45 @@ import axios from 'axios'
 
 	export default {
 		name: 'MyProfile',
+		data() {
+			return {
+				user: {},
+				userTrees: [],
+			}
+		},
+		mounted() {
+			this.getMe()
+			this.getUserTrees()
+
+			document.title = "Mening sahifam"
+		},
 		methods: {
 			async logOut() {
 				await axios
 					.post('api/v1/auth/token/logout/')
 					.then(response => {
 						axios.defaults.headers.common["Authorization"] = ""
-                        localStorage.removeItem("token")
-                        this.$store.commit('removeToken')
-                        this.$router.push('/')
+							localStorage.removeItem("token")
+							this.$store.commit('removeToken')
+							this.$router.push('/')
 					})
         },
+			async getMe() {
+				await axios
+					.get('api/v1/auth/users/me/')
+					.then(response => {
+						this.user = response.data
+						console.log(this.user)
+					})
+			},
+			async getUserTrees() {
+				await axios
+					.get('api/v1/user/trees/')
+					.then(response => {
+						this.userTrees = response.data
+						console.log(this.userTrees)
+					})
+			}
 		},
 	}
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="columns is-justify-content-center">
         <div class="column is-4">
-            <div class="modal is-active">
+            <div class="modal ">
             <!-- <div class="modal-background"></div> -->
                 <div class="modal-card">
                     <header class="modal-card-head">
