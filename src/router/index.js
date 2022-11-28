@@ -1,11 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import TreeDetail from '../components/TreeDetail.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/RegisterView.vue'
+import MyProfile from '../views/MyProfileView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      {
+        // UserProfile will be rendered inside User's <router-view>
+        // when /user/:id/profile is matched
+        path: '/tree/:id',
+        component: TreeDetail,
+      },
+    ],
+  },
+  {
+    path: '/account/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/account/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/account/me',
+    name: 'MyProfile',
+    component: MyProfile
   },
   {
     path: '/about',
