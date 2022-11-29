@@ -2,12 +2,12 @@
 		<AddTree
 			:user_coords="user_coords"
 		/>
-		<div class="column is-4">
+		<div class="column is-3">
 			<TreeDetail 
 				:tree="tree"
 			/>
 		</div>
-		<div class="column is-8">
+		<div class="column is-9">
 			<yandex-map
 				:coords="coords"
 				:controls="controls"
@@ -26,7 +26,7 @@
 					:icon="markerIcon"
 					@click="showDetail(tree.id)"
 				>
-				</ymap-marker> >
+				</ymap-marker>
 			</yandex-map>		
 		</div>
 </template>
@@ -103,7 +103,6 @@ export default {
 			this.user_coords = e.get('coords');
 		},
 		async showDetail(id) {
-			console.log(id)
 			await axios
 				.get("http://127.0.0.1:8000/api/v1/tree/" + id)
 				.then(response => {

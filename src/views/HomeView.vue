@@ -1,6 +1,6 @@
 <template>
 	<div class="columns is-multiline is-gapless is-justify-content-space-around">
-		<div class="column is-12">
+		<!-- <div class="column is-12">
 			<div class="columns ">
 			<div class="column is-2">
 				<div class="">
@@ -27,13 +27,9 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="column is-8"> -->
-			<!-- </div> -->
 			</div>
-		</div>
-		
+		</div> -->
 		<Maps />
-		
 	</div>
 </template>
 

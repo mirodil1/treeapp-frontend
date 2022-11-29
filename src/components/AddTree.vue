@@ -105,7 +105,6 @@ import axios from 'axios';
 				await axios
 					.post('api/v1/trees/', formData)
 					.then(response => {
-						console.log(response)
 						window.location.reload();
 					})
 					.catch(err => {
@@ -119,7 +118,12 @@ import axios from 'axios';
 				handler(user_coords) {
 					this.latitude = user_coords[0]
 					this.longitude = user_coords[1]
-					this.openModal()
+					if (this.$store.state.isAuthenticated) {
+						this.openModal()
+					}
+					else {
+						this.$router.push('account/login')
+					}
 				}
 			}
 		}
