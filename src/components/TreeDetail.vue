@@ -4,11 +4,11 @@
 			<figure class="">
 				<img src="https://picsum.photos/480/300" alt="Placeholder image">
 			</figure>
-			<p class="title is-4">{{ resul.name }}</p>
+			<p class="title is-4">{{ result.name }}</p>
 			<p class="subtitle is-6">@</p>
-			<div class="">
-				<p>{{ resul.type.name }}</p>
-				<p>{{ resul.definition }}</p>
+			<div class="content">
+				<p>{{ result.type.name }}</p>
+				<p>{{ result.definition }}</p>
 			</div>
 		</div>
 	</div>
@@ -21,7 +21,7 @@ export default {
 	name: "TreeDetail",
 	data() {
 		return {
-			resul: {
+			result: {
 				type: {}
 			}
 		}
@@ -54,8 +54,8 @@ export default {
 	watch: {
 		tree: {
 			async handler(tree) {
-			console.log(tree)
-			this.resul = tree
+				console.log(tree)
+				this.result = tree
 			}
 		}
 	},
