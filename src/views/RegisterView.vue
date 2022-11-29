@@ -72,10 +72,6 @@ export default {
 				password: this.password,
 				re_password: this.password2
 			}
-			const formDataLogIn = {
-				email: this.email,
-				password: this.password
-			}
 			await axios
 				.post('api/v1/auth/users/', formData)
 				.then(axios.spread(response => {

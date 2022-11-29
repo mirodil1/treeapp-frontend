@@ -1,5 +1,7 @@
 <template>
-		<AddTree/>
+		<AddTree
+			:user_coords="user_coords"
+		/>
 		<div class="column is-4">
 			<TreeDetail 
 				:tree="tree"
@@ -20,7 +22,6 @@
 					:coords="[tree.latitude, tree.longitude]"
 					:marker-id=tree.id
 					:hint-content=tree.name
-					:balloon="{header: tree.name}"
 					cluster-name="1"
 					:icon="markerIcon"
 					@click="showDetail(tree.id)"
@@ -77,23 +78,15 @@ export default {
 								offset: [-30, -30]
 						}
 					],
-      	},
+			},
     },
 		tree: null
   	} 
 	},
 	mounted() {
 		this.getData()
+		// this.asds()
 	},
-	computed: {
-			balloonTemplate() {
-				return `
-        <h1 class="red">Hi, everyone!</h1>
-        <p>I am here: ${this.user_coords}</p>
-        <img src="http://via.placeholder.com/350x150">
-      `
-			}
-		},
 	methods: {
 		async getData() {
 			await axios
@@ -108,7 +101,6 @@ export default {
 		},
 		onClick(e) {
 			this.user_coords = e.get('coords');
-			console.log(this.user_coords)
 		},
 		async showDetail(id) {
 			console.log(id)
@@ -121,6 +113,11 @@ export default {
 						error.value = error
 						console.log(error)
 				})
+		},
+		async asds() {
+			await loadYmap({});
+			console.log(ymaps.geolocation.get)
+			// здесь доступна переменная ymaps
 		}
 	}
 

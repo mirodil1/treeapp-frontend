@@ -1,13 +1,9 @@
 <template>
-	<div class="columns is-gapless is-justify-content-space-around">
-		<div class="card">
-			<div class="card-content">
-				
-			</div>
-		</div>
-		<!-- <div class="columns is-gapless is-justify-content-space-around"> -->
-			<!-- <div class="column is-4">
-				<div class="card">
+	<div class="columns is-multiline is-gapless is-justify-content-space-around">
+		<div class="column is-12">
+			<div class="columns ">
+			<div class="column is-2">
+				<div class="">
 					<div class="card-content">
 						<div class="dropdown">
 							<div class="dropdown-trigger">
@@ -28,24 +24,27 @@
 						</div>
 						<p class="subtitle">
 						</p>
-						<TreeDetail />
 					</div>
 				</div>
-			</div> -->
+			</div>
 			<!-- <div class="column is-8"> -->
 			<!-- </div> -->
-		<!-- </div> -->
+			</div>
+		</div>
+		
 		<Maps />
+		
 	</div>
 </template>
 
 <script>
 import TreeDetail from "../components/TreeDetail.vue";
 import Maps from "../components/Maps.vue"
+import AddTree from "@/components/AddTree.vue";
 
 export default {
   name: 'HomeView',
-  components: {TreeDetail, Maps},
+  components: {TreeDetail, Maps, AddTree},
 	data() {
 		return {
 			
