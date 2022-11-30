@@ -75,7 +75,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 	:root {
 		--shadowDark: #D9DDE6;
 		--background: #E4E9F2;
@@ -89,11 +89,9 @@ export default {
 		padding: 1.5rem;
 		box-shadow: 8px 8px 15px var(--shadowDark), -8px -8px 15px var(--shadowLight);
 	}
-
 	input {
 		background: var(--shadowLight) !important;
 	}
-
 	a {
 		font-weight: 600;
 	}

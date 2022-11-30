@@ -6,10 +6,11 @@
 				<form @submit.prevent="addTree" method="POST">
 					<div class="field">
 						<div class="control">
-								<div class="dropdown is-fullwidth is-hoverable">
+								<div class="dropdown"  ref="DropDown">
 									<div class="dropdown-trigger">
-										<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-											<span>Daraxt turini tanlang</span>
+										<button @click.prevent="getTreeType" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+											<span v-if="treeType">{{ treeType }}</span>
+											<span v-else>Daraxt turini tanlang</span>
 											<span class="icon is-small">
 													<i class="fas fa-angle-down" aria-hidden="true"></i>
 											</span>
@@ -17,8 +18,8 @@
 									</div>
 									<div class="dropdown-menu" id="dropdown-menu" role="menu">
 										<div class="dropdown-content">
-											<a href="#" class="dropdown-item">
-													Dropdown item
+											<a @click="selectType(treeType)" v-for="treeType in treeTypeList" href="#" class="dropdown-item">
+													{{ treeType.name }}
 											</a>
 										</div>
 									</div>
@@ -33,7 +34,7 @@
 					<div class="field">
 						<div class="file has-name is-fullwidth">
 							<label class="file-label">
-								<input class="file-input" type="file" name="resume">
+								<input @change="handleFile" class="file-input" type="file" ref="inputImage">
 								<span class="file-cta">
 									<span class="file-icon">
 										<i class="fas fa-upload"></i>
@@ -55,10 +56,9 @@
 					</div>
 					<footer class="modal-card-foot">
 					<button type="submit" class="button is-success is-fullwidth">Saqlash</button>
-					<button @click="closeModal" class="button is-warning is-fullwidth">Bekor</button>
+					<button @click.prevent="closeModal" class="button is-warning is-fullwidth">Bekor</button>
 				</footer>
 				</form>
-				
 			</div>
 		</div>
 	</div>
@@ -72,13 +72,14 @@ import axios from 'axios';
 		name: 'AddTree',	
 		data() {
 			return {
-					type: null,
+					typeId: null,
 					name: null,
 					image: null,
 					definition: null,
 					latitude: null,
 					longitude: null,
-					res: null
+					treeType: null,
+					treeTypeList: null
 			}
 		},
 		props: {
@@ -91,27 +92,48 @@ import axios from 'axios';
 			openModal() {
 					this.$refs.AddTreeModal.classList.remove('is-hidden')
 			},
+			handleFile() {
+				this.image = this.$refs.inputImage.files[0]
+			},
 			async addTree() {
-
-				const formData = {
-					type_id: 1,
-					name: this.name,
-					image: this.image,
-					definition: this.definition,
-					latitude: this.latitude,
-					longitude: this.longitude
-				}
-
-				await axios
-					.post('api/v1/trees/', formData)
-					.then(response => {
-						window.location.reload();
-					})
-					.catch(err => {
-						console.log(err)
-					})
-			}
 				
+				const formData = new FormData()
+				// this.image = this.$refs.inputImage.files[0]
+				console.log(this.image)
+				formData.append("type_id", this.typeId)
+				formData.append("name", this.name)
+				formData.append("image", this.image)
+				formData.append("definition", this.definition)
+				formData.append("latitude", this.latitude)
+				formData.append("longitude", this.longitude)
+				console.log(formData)
+				if (this.image) {
+					await axios
+						.post('api/v1/trees/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+						.then(response => {
+							window.location.reload();
+						})
+						.catch(err => {
+							console.log(err)
+						})
+				}
+			},
+			async getTreeType() {
+				this.$refs.DropDown.classList.add('is-active')
+				await axios
+					.get('api/v1/tree/type/')
+					.then(response => {
+						this.treeTypeList = response.data
+					})
+					.catch(error => {
+						console.log(error)
+					})
+			},
+			selectType(value) {
+				this.typeId = value.id
+				this.treeType = value.name
+				this.$refs.DropDown.classList.remove('is-active')
+			}
 		},
 		watch: {
 			user_coords: {
