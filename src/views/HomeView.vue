@@ -29,7 +29,9 @@
 			</div>
 			</div>
 		</div> -->
-		<Maps />
+		<Maps 
+			:regCoords="this.$store.state.regCoords"
+		/>
 	</div>
 </template>
 
@@ -45,10 +47,10 @@ export default {
 		return {
 			
   	}
-	}
+	},
+	mounted() {
+		document.title = "Daraxt"
+	},
 }
 
 </script>
-<style scoped>
-
-</style>

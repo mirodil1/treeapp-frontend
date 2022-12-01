@@ -1,6 +1,6 @@
 <template>
 		<AddTree
-			:user_coords="user_coords"
+			:selectedCoords="selectedCoords"
 		/>
 		<div class="column is-3">
 			<TreeDetail 
@@ -40,14 +40,14 @@ import TreeDetail from './TreeDetail.vue';
 export default {
 	name: "Maps",
 	components: { yandexMap, ymapMarker, TreeDetail, AddTree },
+	props: {
+		regCoords: null
+	},	
 	data() {
 		return {
 		trees: [],
-		coords: [
-			41.29,
-			69.23,
-		],
-		user_coords: null,
+		coords: this.$store.state.regCoords,
+		selectedCoords: null,
 		zoom: 11,
 		controls: ['zoomControl', 'geolocationControl'],
 		markerIcon: {
@@ -100,7 +100,7 @@ export default {
 				})
 		},
 		onClick(e) {
-			this.user_coords = e.get('coords');
+			this.selectedCoords = e.get('coords');
 		},
 		async showDetail(id) {
 			await axios
@@ -117,6 +117,13 @@ export default {
 			await loadYmap({});
 			console.log(ymaps.geolocation.get)
 			// здесь доступна переменная ymaps
+		}
+	},
+	watch: {
+		regCoords: {
+			handler(regCoords) {
+				this.coords = regCoords
+			}
 		}
 	}
 

@@ -28,30 +28,30 @@
 					</div>
 					<div class="field">
 						<div class="control">
-								<input class="input" type="text" placeholder="Nomi" v-model="name">
+								<input class="input" type="text" placeholder="Nomi" required v-model="name">
 						</div>
 					</div>
 					<div class="field">
 						<div class="file has-name is-fullwidth">
 							<label class="file-label">
-								<input @change="handleFile" class="file-input" type="file" ref="inputImage">
+								<input @change="handleFile" accept="image/png, image/gif, image/jpeg" class="file-input" type="file" required ref="inputImage">
 								<span class="file-cta">
 									<span class="file-icon">
 										<i class="fas fa-upload"></i>
 									</span>
 									<span class="file-label">
-										Choose a file…
+										Rasm
 									</span>
 								</span>
 								<span class="file-name">
-									Screen Shot 2017-07-29 at 15.54.25.png
+									{{ fileName }}
 								</span>
 							</label>
 						</div>
 					</div>
 					<div class="field">
 						<div class="control">
-								<textarea class="textarea" type="text" placeholder="Tarif" v-model="definition"></textarea>
+								<textarea class="textarea" type="text" placeholder="Tarif" required v-model="definition"></textarea>
 						</div>
 					</div>
 					<footer class="modal-card-foot">
@@ -79,11 +79,12 @@ import axios from 'axios';
 					latitude: null,
 					longitude: null,
 					treeType: null,
-					treeTypeList: null
+					treeTypeList: null,
+					fileName: null
 			}
 		},
 		props: {
-			user_coords: null
+			selectedCoords: null
 		},
 		methods: {
 			closeModal() {
@@ -94,6 +95,7 @@ import axios from 'axios';
 			},
 			handleFile() {
 				this.image = this.$refs.inputImage.files[0]
+				this.fileName = this.$refs.inputImage.files[0].name
 			},
 			async addTree() {
 				
@@ -136,10 +138,11 @@ import axios from 'axios';
 			}
 		},
 		watch: {
-			user_coords: {
-				handler(user_coords) {
-					this.latitude = user_coords[0]
-					this.longitude = user_coords[1]
+			selectedCoords: {
+				handler(selectedCoords) {
+					this.latitude = selectedCoords[0]
+					this.longitude = selectedCoords[1]
+					console.log(selectedCoords)
 					if (this.$store.state.isAuthenticated) {
 						this.openModal()
 					}
