@@ -4,7 +4,9 @@ export default createStore({
   state: {
     isLoading: false,
     isAuthenticated: false,
-    token: null
+    token: null,
+    regCoords: [41.29,
+			69.23,],
   },
   getters: {
   },
