@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Register from '../views/RegisterView.vue'
 import MyProfile from '../views/MyProfileView.vue'
 
+import store from '@/store'
+
 const routes = [
   {
     path: '/',
@@ -12,8 +14,6 @@ const routes = [
     component: HomeView,
     children: [
       {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
         path: '/tree/:id',
         component: TreeDetail,
       },
@@ -32,7 +32,10 @@ const routes = [
   {
     path: '/account/me',
     name: 'MyProfile',
-    component: MyProfile
+    component: MyProfile,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/about',
@@ -47,6 +50,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
+    next({ name: 'Login', query: { to: to.path } });
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -7,7 +7,7 @@
                         Umumiy
                     </p>
                     <ul class="menu-list">
-                        <li><a class="is-active is-success">Dashboard</a></li>
+                        <li><a class="is-active is-success">Asosiy</a></li>
                         <li><a>Customers</a></li>
                         <li><a>Other</a></li>
                     </ul>
@@ -21,7 +21,7 @@
                         <li><a>Reports</a></li>
                     </ul>
 										<p @click="logOut" class="button is-warning has-text-white menu-label">
-                        CHIQISH
+											CHIQISH
                     </p>
                 </aside>
             </div>
@@ -29,12 +29,12 @@
                 <section class="hero is-success welcome is-small">
                     <div class="hero-body">
                         <div class="container">
-                            <h1 class="title">
-                                Salom, {{ user.first_name }}
-                            </h1>
-                            <h2 class="subtitle">
-                                Daraxtlarni saqlab qoling
-                            </h2>
+													<h1 class="title">
+															Salom, {{ user.first_name }}
+													</h1>
+													<h2 class="subtitle">
+															Daraxtlarni saqlab qoling
+													</h2>
                         </div>
                     </div>
                 </section>
@@ -152,7 +152,6 @@ import moment from 'moment';
 		color: #209cee;
 	}
 	.card-content .content {
-		text-align: left;
 		font-size: 14px;
 		margin: 1rem 1rem;
 	}
@@ -166,8 +165,9 @@ import moment from 'moment';
 		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 		margin-bottom: 2rem;
 	}
-		.card-footer {
-			margin-top: auto;
+		
+	.card-footer {
+		margin-top: auto;
 	}
 	.is-shady {
 		animation: flyintoright .4s backwards;
