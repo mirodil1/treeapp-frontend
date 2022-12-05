@@ -1,9 +1,9 @@
 <template>
 	<div class="card">
 		<div class="card-content">
-			<div class="dropdown" ref="RegNames" @click="dropDownRegNames">
+			<div class="dropdown" ref="RegNames" @focusin="dropDownRegNames">
 				<div class="dropdown-trigger">
-					<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+					<button class="button is-success is-outlined" aria-haspopup="true" aria-controls="dropdown-menu">
 						<span v-if="regionName">{{ regionName }}</span>
 						<span v-else>Toshkent</span>
 						<span class="icon is-small">
@@ -13,7 +13,7 @@
 				</div>
 				<div class="dropdown-menu" id="dropdown-menu" role="menu">
 					<div class="dropdown-content">
-						<a v-for="key, value in Object.entries(latLong)" @click="selectReg(key)" href="#" class="dropdown-item">
+						<a v-for="key, value in Object.entries(latLong)" @click="selectReg(key)" class="dropdown-item">
 							{{key[0]}}
 						</a>
 					</div>
@@ -29,6 +29,7 @@
 					<div class="content">
 						<h4>{{ result.name }}</h4>
 						{{ result.definition }}
+						<p class="has-text-grey-light mt-4 is-size-6">Joyladi: {{ result.user.first_name }} </p>
 						<br>
 					</div>
 					<div class="card-footer">
@@ -49,7 +50,8 @@ export default {
 	data() {
 		return {
 			result: {
-				type: {}
+				type: {},
+				user: {}
 			},
 			latLong: {
 				'Toshkent': [41.29, 69.23,],
@@ -57,13 +59,14 @@ export default {
 				'Buxoro': [39.77, 64.43],
 				'Fargona': [40.38, 71.78],
 				'Jizzax': [40.12, 67.84],
-				'Xorazm': [],
+				'Xorazm': [41.55, 60.63],
+				'Namangan': [41, 71.67],
 				'Navoiy': [40.08, 65.38],
 				'Qashqadaryo': [38.86, 65.79],
 				'Qoraqalpogiston': [42.45, 59.61],
 				'Samarqand': [39.65, 66.96],
 				'Sirdaryo': [40.49, 68.78],
-				'Surxandaryo': [],
+				'Surxandaryo': [37.22, 67.28],
     	},
 			regionName: null
 		}
@@ -80,7 +83,7 @@ export default {
 		selectReg(coords) {
 			this.$store.state.regCoords = coords[1]
 			this.regionName = coords[0]
-			this.$refs.RegNames.classList.remove('is-active')
+			this.$refs.RegNames.classList.remove("is-active")
 		},
 		createdAt(value) {
 			return moment(value).format('YYYY-MM-DD, HH:mm')
@@ -107,7 +110,6 @@ export default {
 		color: #209cee;
 	}
 	.card-content .content {
-		text-align: left;
 		font-size: 14px;
 		margin: 1rem 1rem;
 	}
@@ -119,5 +121,14 @@ export default {
 	}
 	.is-shady:hover {
 		box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 0 6px 6px rgba(0, 0, 0, .19);
+	}
+	.dropdown {
+			width: 100%;
+	}
+	.dropdown-trigger {
+		width: 100%
+	}
+	.button {
+		width: 100%;
 	}
 </style>

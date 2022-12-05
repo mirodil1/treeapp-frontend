@@ -8,7 +8,7 @@
 						<div class="control">
 								<div class="dropdown"  ref="DropDown">
 									<div class="dropdown-trigger">
-										<button @click.prevent="getTreeType" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+										<button @click.prevent="getTreeType" class="button is-success is-outlined" aria-haspopup="true" aria-controls="dropdown-menu">
 											<span v-if="treeType">{{ treeType }}</span>
 											<span v-else>Daraxt turini tanlang</span>
 											<span class="icon is-small">
@@ -18,9 +18,9 @@
 									</div>
 									<div class="dropdown-menu" id="dropdown-menu" role="menu">
 										<div class="dropdown-content">
-											<a @click="selectType(treeType)" v-for="treeType in treeTypeList" href="#" class="dropdown-item">
+											<span @click="selectType(treeType)" v-for="treeType in treeTypeList" class="dropdown-item is-clickable">
 													{{ treeType.name }}
-											</a>
+											</span>
 										</div>
 									</div>
 								</div>
@@ -28,13 +28,13 @@
 					</div>
 					<div class="field">
 						<div class="control">
-								<input class="input" type="text" placeholder="Nomi" required v-model="name">
+								<input class="input is-success" type="text" placeholder="Nomi" required v-model="name">
 						</div>
 					</div>
 					<div class="field">
 						<div class="file has-name is-fullwidth">
 							<label class="file-label">
-								<input @change="handleFile" accept="image/png, image/gif, image/jpeg" class="file-input" type="file" required ref="inputImage">
+								<input @change="handleFile" accept="image/png, image/gif, image/jpeg" class="file-input is-success" type="file" required ref="inputImage">
 								<span class="file-cta">
 									<span class="file-icon">
 										<i class="fas fa-upload"></i>
@@ -51,7 +51,7 @@
 					</div>
 					<div class="field">
 						<div class="control">
-								<textarea class="textarea" type="text" placeholder="Tarif" required v-model="definition"></textarea>
+								<textarea class="textarea is-success" type="text" placeholder="Qo'shimcha m'alumot" required v-model="definition"></textarea>
 						</div>
 					</div>
 					<footer class="modal-card-foot">
@@ -155,7 +155,7 @@ import axios from 'axios';
 	}
 </script>
 
-<style>
+<style scoped>
 	.card-form {
 		position: absolute;
 		z-index: 99;
