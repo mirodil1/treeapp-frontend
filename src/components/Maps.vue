@@ -86,7 +86,6 @@ export default {
 	},
 	mounted() {
 		this.getData()
-		// this.asds()
 	},
 	methods: {
 		async getData() {
@@ -97,6 +96,7 @@ export default {
 				})
 				.catch(error => {
 						error.value = error
+						console.log(error)
 				})
 		},
 		onClick(e) {
@@ -116,11 +116,6 @@ export default {
 
 			this.$store.commit('setIsLoading', false)
 		},
-		async asds() {
-			await loadYmap({});
-			console.log(ymaps.geolocation.get)
-			// здесь доступна переменная ymaps
-		}
 	},
 	watch: {
 		regCoords: {
