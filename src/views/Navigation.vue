@@ -2,7 +2,7 @@
 	<header>
 		<nav class="container navbar is-transparent">
 			<div class="navbar-brand">
-				<a class="navbar-item is-size-3 has-text-success" href="http://localhost:8080/">
+				<a class="navbar-item is-size-3 has-text-success" href="daraxt.redapp.uz">
 					<i class="fas fa-tree">Daraxt</i>
 				</a>
 				<a class="navbar-item" href="https://bulma.io">
