@@ -8,30 +8,18 @@
 				<a class="navbar-item" href="https://bulma.io">
 					
 				</a>
-				<div class="navbar-burger" data-target="navbarExampleTransparentExample">
+				<div class="navbar-burger" data-target="navbarExampleTransparentExample" @click="showMobileMenu = !showMobileMenu">
 					<span></span>
 					<span></span>
 					<span></span>
 				</div>
 			</div>
-
-			<div id="navbarExampleTransparentExample" class="navbar-menu">
+			<div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
 				<div class="navbar-start">
 				</div>
-
 				<div class="navbar-end">
 					<div class="navbar-item">
 						<div class="field is-grouped">
-							<!-- <p class="control">
-								<a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="https://bulma.io" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=https://bulma.io&amp;via=jgthms">
-									<span class="icon">
-										<i class="fab fa-twitter"></i>
-									</span>
-									<span>
-										Kirish
-									</span>
-								</a>
-							</p> -->
 							<p v-if="!this.$store.state.isAuthenticated" class="control">
 								<router-link class="button is-success" :to="{name: 'Login'}">
 									<span>Daraxt qo'shish</span>
@@ -57,7 +45,8 @@ export default {
     name: 'Navigation',
 	data() {
 		return {
-			
+			showMobileMenu: false,
+
 		}
 	},
 }

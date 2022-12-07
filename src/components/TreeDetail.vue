@@ -19,6 +19,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading }">
+      			<div class="lds-dual-ring"></div>
+			</div>
 			<div v-if="(result.name)" class="card is-shady mt-3">
 				<div class="card-image">
 					<figure class="image is-4by3">
@@ -72,7 +75,8 @@ export default {
 		}
 	},
 	props: {
-		tree: {}
+		tree: {},
+		isLoading: null
 	},
 	mounted() {
 	},

@@ -5,9 +5,10 @@ import store from './store'
 import axios from 'axios'
 import YmapPlugin from 'vue-yandex-maps'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/'
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URL
+
 const settings = {
-    apiKey: 'd4613343-3ef8-4be9-8822-deb1dcdfb779',
+    apiKey: process.env.VUE_APP_YANDEX_MAP_SECRET_KEY,
     lang: 'ru_RU',
     coordorder: 'latlong',
     enterprise: false,

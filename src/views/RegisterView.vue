@@ -30,7 +30,7 @@
 								</div>
 							</div>
 							<br />
-							<button class="button is-block is-fullwidth is-success is-medium is-rounded" type="submit">
+							<button class="button is-block is-fullwidth is-success is-medium is-rounded" type="submit" v-bind:class="{'is-loading': $store.state.isLoading }">
 								Ro'yxatdan o'tish
 							</button>
 						</form>
@@ -74,6 +74,9 @@ export default {
 				password: this.password,
 				re_password: this.password2
 			}
+
+			this.$store.commit('setIsLoading', true)
+			
 			if (this.password.length < 8) {
 				this.errorMsg = "Kamida 8 ta belgi talab etiladi"
 			} else if (this.password != this.password2) {
@@ -82,10 +85,8 @@ export default {
 				await axios
 					.post('api/v1/auth/users/', formData)
 					.then(axios.spread(response => {
-						console.log(response)
 					}))
 					.catch(err => {
-						console.log(err.response)
 						this.errorMsg = "Tizimda xatolik, qayta urinib ko'ring"
 					})
 				await axios
@@ -101,11 +102,10 @@ export default {
 						this.$router.push(toPath)
 					})
 					.catch(err => {
-						console.log(err.response)
 						this.errorMsg = "Tizimda xatolik, qayta urinib ko'ring"
 					})
 			}
-			
+			this.$store.commit('setIsLoading', false)
 		}
 	}
 }

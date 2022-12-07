@@ -104,7 +104,7 @@ import moment from 'moment';
 		mounted() {
 			this.getMe()
 			this.getUserTrees()
-
+	
 			document.title = "Mening sahifam"
 		},
 		methods: {
@@ -123,7 +123,6 @@ import moment from 'moment';
 					.get('api/v1/auth/users/me/')
 					.then(response => {
 						this.user = response.data
-						console.log(this.user)
 					})
 			},
 			async getUserTrees() {
@@ -131,7 +130,6 @@ import moment from 'moment';
 					.get('api/v1/user/trees/')
 					.then(response => {
 						this.userTrees = response.data
-						console.log(this.userTrees)
 					})
 			},
 			createdAt(value) {

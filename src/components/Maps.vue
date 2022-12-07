@@ -5,6 +5,7 @@
 		<div class="column is-3">
 			<TreeDetail 
 				:tree="tree"
+				:isLoading="$store.state.isLoading"
 			/>
 		</div>
 		<div class="column is-9">
@@ -96,22 +97,24 @@ export default {
 				})
 				.catch(error => {
 						error.value = error
-						console.log(error)
 				})
 		},
 		onClick(e) {
 			this.selectedCoords = e.get('coords');
 		},
 		async showDetail(id) {
+			this.$store.commit('setIsLoading', true)
 			await axios
+
 				.get("http://127.0.0.1:8000/api/v1/tree/" + id)
 				.then(response => {
 						this.tree = response.data
 				})
 				.catch(error => {
 						error.value = error
-						console.log(error)
 				})
+
+			this.$store.commit('setIsLoading', false)
 		},
 		async asds() {
 			await loadYmap({});

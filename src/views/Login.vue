@@ -20,7 +20,7 @@
 								</div>
 							</div>
 							<br />
-							<button class="button is-block is-fullwidth is-success is-medium is-rounded" type="submit">
+							<button class="button is-block is-fullwidth is-success is-medium is-rounded " type="submit" v-bind:class="{'is-loading': $store.state.isLoading }">
 								Kirish
 							</button>
 						</form>
@@ -56,6 +56,9 @@ export default {
 				email: this.email,
 				password: this.password
 			}
+
+			this.$store.commit('setIsLoading', true)
+
 			await axios
 				.post('api/v1/auth/token/login/', formData)
 				.then(response => {
@@ -71,6 +74,8 @@ export default {
 				.catch(err => {
 					this.errorMsg = "Tizmda xatolik, qayta urinib ko'ring"
 				})
+			
+			this.$store.commit('setIsLoading', false)
 		}
 	}
 }
