@@ -6,7 +6,8 @@ import axios from 'axios'
 import YmapPlugin from 'vue-yandex-maps'
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_TREE_API_URL
-
+console.log(process.env.VUE_APP_YANDEX_MAP_SECRET_KEY)
+console.log(process.env.VUE_APP_BASE_TREE_API_URL)
 const settings = {
     apiKey: process.env.VUE_APP_YANDEX_MAP_SECRET_KEY,
     lang: 'ru_RU',
