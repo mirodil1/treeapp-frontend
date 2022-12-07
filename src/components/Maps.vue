@@ -92,7 +92,9 @@ export default {
 			await axios
 				.get("api/v1/trees/")
 				.then(response => {
+						console.log(response)
 						this.trees = response.data
+						
 				})
 				.catch(error => {
 						error.value = error
