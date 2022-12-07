@@ -91,7 +91,7 @@ export default {
 	methods: {
 		async getData() {
 			await axios
-				.get("http://127.0.0.1:8000/api/v1/trees/")
+				.get("api/v1/trees/")
 				.then(response => {
 						this.trees = response.data
 				})
@@ -106,7 +106,7 @@ export default {
 			this.$store.commit('setIsLoading', true)
 			await axios
 
-				.get("http://127.0.0.1:8000/api/v1/tree/" + id)
+				.get("api/v1/tree/" + id)
 				.then(response => {
 						this.tree = response.data
 				})
