@@ -55,7 +55,13 @@
 						</div>
 					</div>
 					<footer class="modal-card-foot">
-					<button type="submit" class="button is-success is-fullwidth">Saqlash</button>
+					<button type="submit" 
+						class="button is-success" 
+						v-bind:class="{'is-loading': isLoading }"
+						:disabled="isDisabled"
+					>
+					Saqlash
+					</button>
 					<button @click.prevent="closeModal" class="button is-warning is-fullwidth">Bekor</button>
 				</footer>
 				</form>
@@ -80,7 +86,9 @@ import axios from 'axios';
 					longitude: null,
 					treeType: null,
 					treeTypeList: null,
-					fileName: null
+					fileName: null,
+					isDisabled: false,
+					isLoading: false
 			}
 		},
 		props: {
@@ -100,8 +108,6 @@ import axios from 'axios';
 			async addTree() {
 				
 				const formData = new FormData()
-				// this.image = this.$refs.inputImage.files[0]
-				console.log(this.image)
 				formData.append("type_id", this.typeId)
 				formData.append("name", this.name)
 				formData.append("image", this.image)
@@ -110,15 +116,20 @@ import axios from 'axios';
 				formData.append("longitude", this.longitude)
 				console.log(formData)
 				if (this.image) {
+					this.isLoading = true
+					this.isDisabled = true
 					await axios
 						.post('api/v1/trees/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
 						.then(response => {
+							// this.$forceUpdate();
 							window.location.reload();
 						})
 						.catch(err => {
 							console.log(err)
 						})
 				}
+				this.isLoading = false
+				this.isDisabled = false
 			},
 			async getTreeType() {
 				this.$refs.DropDown.classList.add('is-active')
@@ -142,7 +153,6 @@ import axios from 'axios';
 				handler(selectedCoords) {
 					this.latitude = selectedCoords[0]
 					this.longitude = selectedCoords[1]
-					console.log(selectedCoords)
 					if (this.$store.state.isAuthenticated) {
 						this.openModal()
 					}
