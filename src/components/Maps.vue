@@ -57,12 +57,11 @@ export default {
 			imageSize: [43, 43],
 			imageOffset: [0, 0],
 			contentOffset: [0, 15],
-		// contentLayout: '<div style="color: #FFFFFF; font-weight: bold;"></div>'
 		},
 		clusterOptions: {
 			1: {
 					clusterDisableClickZoom: false,
-					clusterOpenBalloonOnClick: true,
+					clusterOpenBalloonOnClick: false,
 					clusterHideIconOnBalloonOpen: false,
 					geoObjectHideIconOnBalloonOpen: false,
 
