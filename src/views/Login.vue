@@ -11,7 +11,7 @@
 						<form @submit.prevent="loginUser" method="post">
 							<div class="field">
 								<div class="control">
-									<input class="input is-medium is-rounded " type="email" placeholder="falonchi@namuna.com" v-model="email" required />
+									<input class="input is-medium is-rounded " type="email" placeholder="Email" v-model="email" required />
 								</div>
 							</div>
 							<div class="field">
