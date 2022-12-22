@@ -20,8 +20,8 @@
                         <li><a>Balance</a></li>
                         <li><a>Reports</a></li>
                     </ul>
-										<p @click="logOut" class="button is-warning has-text-white menu-label">
-											CHIQISH
+					<p @click="logOut" class="button is-warning has-text-white menu-label">
+						CHIQISH
                     </p>
                 </aside>
             </div>
@@ -29,12 +29,12 @@
                 <section class="hero is-success welcome is-small">
                     <div class="hero-body">
                         <div class="container">
-													<h1 class="title">
-															Salom, {{ user.first_name }}
-													</h1>
-													<h2 class="subtitle">
-															Daraxtlarni saqlab qoling
-													</h2>
+							<h1 class="title">
+									Salom, {{ user.first_name }}
+							</h1>
+							<h2 class="subtitle">
+									Daraxtlarni saqlab qoling
+							</h2>
                         </div>
                     </div>
                 </section>
@@ -62,27 +62,35 @@
                     </div>
                 </section>
                 <section class="container">
-									<div class="columns features is-multiline is-justify-content-space-between">
-										<div v-for="userTree in userTrees" class="column is-4" data-target="modal-image2">
-											<div class="card is-shady">
-												<div class="card-image">
-													<figure class="image is-4by3">
-														<img class="modal-button" :src="userTree.get_image" :alt="userTree.name" data-target="modal-image2">
-													</figure>
-												</div>
-												<div class="card-content">
-													<div class="content">
-														<h4>{{ userTree.name }}</h4>
-														{{ userTree.definition }}
-														<br>
-													</div>
-													<div class="card-footer">
-														<p class="has-text-grey-light is-size-6 mt-3">{{ createdAt(userTree.created_at) }}</p>
-													</div>
-												</div>
-											</div>
-										</div>
+					<div class="columns features is-multiline is-justify-content-space-between">
+						<div v-for="userTree in userTrees" class="column is-4" data-target="modal-image2">
+							<div class="card is-shady">
+								<div class="card-image">
+									<figure class="image is-4by3">
+										<img class="modal-button" :src="userTree.get_image" :alt="userTree.name" data-target="modal-image2">
+									</figure>
+								</div>
+								<div class="card-content">
+									<div class="content">
+										<h4>{{ userTree.name }}</h4>
+										{{ userTree.definition }}
+										<br>
 									</div>
+									<div class="is-flex">
+										<a class="is-align-self-center" :href="result.get_qrcode" :download="result.name">
+											<p class="has-text-success is-clickable ">
+												Yuklash
+												<i class="fas fa-download"></i>
+											</p>
+										</a>
+									</div>
+									<div class="card-footer">
+										<p class="has-text-grey-light is-size-6 mt-3">{{ createdAt(userTree.created_at) }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
                 </section>
             </div>
         </div>
