@@ -77,12 +77,15 @@
 										<br>
 									</div>
 									<div class="is-flex">
-										<a class="is-align-self-center" :href="result.get_qrcode" :download="result.name">
-											<p class="has-text-success is-clickable ">
+										<figure class="image is-32x32">
+											<img :src="userTree.get_qrcode" :alt="userTree.get_qrcode">
+										</figure>
+											<p class="has-text-success is-align-self-center is-clickable"
+												@click="downloadImage(userTree.get_qrcode, userTree.name)"
+											>
 												Yuklash
 												<i class="fas fa-download"></i>
 											</p>
-										</a>
 									</div>
 									<div class="card-footer">
 										<p class="has-text-grey-light is-size-6 mt-3">{{ createdAt(userTree.created_at) }}</p>
@@ -142,7 +145,21 @@ import moment from 'moment';
 			},
 			createdAt(value) {
 				return moment(value).format('YYYY-MM-DD, HH:mm')
-			}
+			},
+			async downloadImage(url, name) {
+			await axios
+				.get(url, {responseType:'blob'})
+				.then((response) => {
+					var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+					var fileLink = document.createElement('a');
+
+					fileLink.href = fileURL;
+					fileLink.setAttribute('download', `${name}.png`);
+					document.body.appendChild(fileLink);
+
+					fileLink.click();
+				});
+		}
 		},
 	}
 </script>
