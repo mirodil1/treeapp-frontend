@@ -122,6 +122,8 @@ import axios from 'axios';
 						.post('api/v1/trees/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
 						.then(response => {
 							// this.$forceUpdate();
+							// this.$router.push("tree/")
+							console.log(response)
 							window.location.reload();
 						})
 						.catch(err => {

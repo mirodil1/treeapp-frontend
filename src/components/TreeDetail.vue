@@ -19,12 +19,14 @@
 				<figure class="image is-32x32">
 					<img :src="result.get_qrcode" :alt="result.get_qrcode">
 				</figure>
-				<a class="is-align-self-center" :href="result.get_qrcode" :download="result.name">
-					<p class="has-text-success is-clickable ">
+				<!-- <a class="is-align-self-center" :href="result.get_qrcode" :download="result.name"> -->
+					<p class="has-text-success is-align-self-center is-clickable"
+						@click="downloadImage(result.get_qrcode, result.name)"
+					>
 						Yuklash
 						<i class="fas fa-download"></i>
 					</p>
-				</a>
+				<!-- </a> -->
 			</div>
 			<div class="card-footer">
 				<p class="card-footer-item has-text-grey-light is-size-6 mt-3">{{ result.type.name }}</p>
@@ -41,6 +43,7 @@
 <script>
 import axios from 'axios'
 import moment from 'moment';
+
 export default {
 	name: "TreeDetail",
 	data() {
@@ -78,6 +81,22 @@ export default {
 
 			this.$store.commit('setIsLoading', false)
 		},
+		async downloadImage(url, name) {
+			await axios
+				.get(url, {responseType:'blob'})
+				.then((response) => {
+					console.log(url)
+					console.log(response)
+					var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+					var fileLink = document.createElement('a');
+
+					fileLink.href = fileURL;
+					fileLink.setAttribute('download', `${name}.png`);
+					document.body.appendChild(fileLink);
+
+					fileLink.click();
+				});
+		}
 	},
 	computed: {
 
