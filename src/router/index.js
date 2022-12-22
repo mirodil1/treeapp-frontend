@@ -4,6 +4,7 @@ import TreeDetail from '../components/TreeDetail.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/RegisterView.vue'
 import MyProfile from '../views/MyProfileView.vue'
+import NotFound from '../views/NotFound.vue'
 
 import store from '@/store'
 
@@ -14,7 +15,8 @@ const routes = [
     component: HomeView,
     children: [
       {
-        path: '/tree/:id',
+        path: 'tree/:id',
+        name: 'TreeDetail',
         component: TreeDetail,
       },
     ],
@@ -38,12 +40,9 @@ const routes = [
     }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

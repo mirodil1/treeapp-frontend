@@ -157,7 +157,7 @@ import axios from 'axios';
 						this.openModal()
 					}
 					else {
-						this.$router.push('account/login')
+						this.$router.push('/account/login')
 					}
 				}
 			}
